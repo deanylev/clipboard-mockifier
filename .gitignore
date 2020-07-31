@@ -1,0 +1,7 @@
+.qmake.stash
+Clipboard Mockifier.app
+Makefile
+build/*
+!build/clipboard-mockifier.pro
+main.o
+vendor
