@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QAction>
+#include <QCloseEvent>
 #include <QHotkey>
 #include <QKeySequence>
 #include <QKeySequenceEdit>
@@ -20,11 +22,15 @@ public:
 private slots:
   void handleHotkeyMockifyClipboard();
   void handleKeySequenceMockifyClipboardChanged(const QKeySequence keySequence);
+  void handleTrayMenuTriggered(QAction *action);
 
 private:
   QHotkey *hotkeyMockifyClipboard;
   QKeySequenceEdit *keySequenceEditMockifyClipboard;
   QKeySequence keySequenceMockifyClipboard;
   QSettings *settings;
+  QAction *trayMenuActionQuit;
+  QAction *trayMenuActionSettings;
+  void closeEvent(QCloseEvent *event);
   void registerSettings();
 };
