@@ -2,6 +2,7 @@
 Clipboard Mockifier.app
 Makefile
 build/*
+!build/appdmg.json
 !build/clipboard-mockifier.pro
 main.o
 vendor
