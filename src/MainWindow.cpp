@@ -1,5 +1,3 @@
-#include "MainWindow.h"
-
 #include <QClipboard>
 #include <QCoreApplication>
 #include <QGuiApplication>
@@ -10,6 +8,8 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <Qt>
+
+#include "MainWindow.h"
 
 #define SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT "shortcuts/mockify_clipboard"
 

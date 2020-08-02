@@ -1,5 +1,7 @@
+include(../src/singleapplication/singleapplication.pri)
 include(../vendor/vendor.pri)
 
+DEFINES += QAPPLICATION_CLASS=QApplication
 HEADERS += ../src/MainWindow.h
 ICON = ../res/icon.icns
 QMAKE_INFO_PLIST = ../res/clipboard-mockifier-Info.plist
