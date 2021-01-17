@@ -1,8 +1,12 @@
+#include <cstdlib>
+#include <cstring>
+
 #include <QClipboard>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLabel>
 #include <QMenu>
+#include <QPixmap>
 #include <QSystemTrayIcon>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -10,11 +14,14 @@
 
 #include "MainWindow.h"
 
+#define IMAGE_WIDTH 75
 #define SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT "shortcuts/mockify_clipboard"
+#define WINDOW_HEIGHT 200
+#define WINDOW_WIDTH 200
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-  setFixedSize(200, 100);
+  setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
   setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
 
   registerSettings();
@@ -24,9 +31,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
   keySequenceEditMockifyClipboard = new QKeySequenceEdit(keySequenceMockifyClipboard, this);
   connect(keySequenceEditMockifyClipboard, &QKeySequenceEdit::keySequenceChanged, this, &MainWindow::handleKeySequenceMockifyClipboardChanged);
 
-  QLabel *labelMockifiyClipboard = new QLabel("Clipboard Mockifier Shortcut", this);
+  QPixmap image(":/res/icon.png");
+  QLabel *labelImage = new QLabel();
+  labelImage->setPixmap(image.scaledToWidth(IMAGE_WIDTH));
+
+  QLabel *labelVersion = new QLabel((std::string("Version ") + VERSION).c_str(), this);
+  QLabel *labelMockifiyClipboard = new QLabel("Keyboard Shortcut", this);
 
   QVBoxLayout *layout = new QVBoxLayout();
+  layout->addWidget(labelImage);
+  layout->addWidget(labelVersion);
   layout->addWidget(labelMockifiyClipboard);
   layout->addWidget(keySequenceEditMockifyClipboard);
 
