@@ -1,9 +1,7 @@
 #pragma once
 
-#include <QAction>
 #include <QCloseEvent>
 #include <QHotkey>
-#include <QKeySequence>
 #include <QKeySequenceEdit>
 #include <QMainWindow>
 #include <QSettings>

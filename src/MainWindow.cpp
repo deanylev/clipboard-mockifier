@@ -1,5 +1,4 @@
 #include <QClipboard>
-#include <QCoreApplication>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLabel>
@@ -19,10 +18,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
   setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
 
   registerSettings();
-  this->hotkeyMockifyClipboard = new QHotkey(keySequenceMockifyClipboard, true, this);
+  hotkeyMockifyClipboard = new QHotkey(keySequenceMockifyClipboard, true, this);
   connect(hotkeyMockifyClipboard, &QHotkey::activated, this, &MainWindow::handleHotkeyMockifyClipboard);
 
-  this->keySequenceEditMockifyClipboard = new QKeySequenceEdit(keySequenceMockifyClipboard, this);
+  keySequenceEditMockifyClipboard = new QKeySequenceEdit(keySequenceMockifyClipboard, this);
   connect(keySequenceEditMockifyClipboard, &QKeySequenceEdit::keySequenceChanged, this, &MainWindow::handleKeySequenceMockifyClipboardChanged);
 
   QLabel *labelMockifiyClipboard = new QLabel("Clipboard Mockifier Shortcut", this);
@@ -37,8 +36,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
   setCentralWidget(window);
 
   QMenu *trayMenu = new QMenu("Clipboard Mockifier", this);
-  this->trayMenuActionSettings = trayMenu->addAction("Settings");
-  this->trayMenuActionQuit = trayMenu->addAction("Quit");
+  trayMenuActionSettings = trayMenu->addAction("Settings");
+  trayMenuActionQuit = trayMenu->addAction("Quit");
   connect(trayMenu, &QMenu::triggered, this, &MainWindow::handleTrayMenuTriggered);
 
   QSystemTrayIcon *trayIcon = new QSystemTrayIcon(QIcon(":/res/icon.png"), this);
@@ -46,7 +45,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
   trayIcon->show();
 }
 
-void MainWindow::closeEvent(QCloseEvent *event) {
+void MainWindow::closeEvent(QCloseEvent *event)
+{
   hide();
   event->ignore();
 }
@@ -57,8 +57,7 @@ void MainWindow::handleHotkeyMockifyClipboard()
   QString originalText = clipboard->text();
   QString newText;
 
-  for (int i = 0; i < originalText.length(); i++)
-  {
+  for (int i = 0; i < originalText.length(); i++) {
     bool uppercase = rand() % 2 == 0;
     QChar character = originalText.at(i);
     QChar transformedCharacter = uppercase ? character.toUpper() : character.toLower();
@@ -70,8 +69,8 @@ void MainWindow::handleHotkeyMockifyClipboard()
 
 void MainWindow::handleKeySequenceMockifyClipboardChanged(const QKeySequence keySequence)
 {
-  this->settings->setValue(SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT, keySequence.toString());
-  this->keySequenceMockifyClipboard = *(const_cast<QKeySequence *>(&keySequence));
+  settings->setValue(SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT, keySequence.toString());
+  keySequenceMockifyClipboard = *(const_cast<QKeySequence *>(&keySequence));
   keySequenceEditMockifyClipboard->setKeySequence(keySequenceMockifyClipboard);
   hotkeyMockifyClipboard->setShortcut(keySequenceMockifyClipboard, true);
 }
@@ -88,15 +87,12 @@ void MainWindow::handleTrayMenuTriggered(QAction *action)
 
 void MainWindow::registerSettings()
 {
-  this->settings = new QSettings("Dean Levinson", "Clipboard Mockifier");
+  settings = new QSettings("Dean Levinson", "Clipboard Mockifier");
 
-  if (settings->contains(SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT))
-  {
+  if (settings->contains(SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT)) {
     QString keySequenceString = settings->value(SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT).toString();
-    this->keySequenceMockifyClipboard = QKeySequence::fromString(keySequenceString);
-  }
-  else
-  {
-    this->keySequenceMockifyClipboard = QKeySequence("ctrl+alt+Y");
+    keySequenceMockifyClipboard = QKeySequence::fromString(keySequenceString);
+  } else {
+    keySequenceMockifyClipboard = QKeySequence("ctrl+alt+Y");
   }
 }

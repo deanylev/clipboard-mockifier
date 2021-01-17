@@ -5,4 +5,5 @@ build/*
 !build/appdmg.json
 !build/clipboard-mockifier.pro
 main.o
+node_modules
 vendor
