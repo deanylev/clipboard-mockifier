@@ -2,13 +2,23 @@
 
 Mockify whatever is in your clipboard.
 
-## Build instructions
+## Build Setup
 
-1. Have qt and qpm installed
+1. Have Qt and qpm installed
 2. Clone the repo
 3. Run `git submodule update --init --recursive`
 4. Run `qpm install`
-5. Run `cd build`
-6. Run `qmake clipboard-mockifier.pro DEFINES+='VERSION=\\\"$YOURVERSION\\\"'` where $YOURVERSION is the version you want to appear in the settings menu
-7. Run `make`
 
+In terms of Qt, you will likely want to compile it yourself with the `-static` flag and then install it, so that Clipboard Mockifier is statically linked against it. Otherwise, any user will need to install Qt themselves in order to run Clipboard Mockifier, which is obviously not ideal.
+
+## Preparation
+Run `VERSION=$version make configure` where "$version" is the version you want to appear on the settings screen. Run this every time you want to change the displayed version.
+
+## Building
+Run `make`.
+
+## Running
+Run `make run`, this will kill any currently running instances of Clipboard Mockifier.
+
+## Building a macOS DMG
+Run `VERSION=$version make installer` where "$version" is the version that you want to appear in the filename, e.g. "Clipboard.Mockifier.1.0.1.dmg". This should be the same one you used when running `make configure`.
