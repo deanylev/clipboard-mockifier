@@ -17,7 +17,7 @@
 
 #define IMAGE_WIDTH 75
 #define SETTINGS_KEY_MOCKIFY_CLIPBOARD_SHORTCUT "shortcuts/mockify_clipboard"
-#define WINDOW_HEIGHT 200
+#define WINDOW_HEIGHT 220
 #define WINDOW_WIDTH 200
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
