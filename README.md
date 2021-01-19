@@ -9,7 +9,7 @@ Mockify whatever is in your clipboard.
 3. Run `git submodule update --init --recursive`
 4. Run `qpm install`
 
-In terms of Qt, you will likely want to compile it yourself with the `-static` flag and then install it, so that Clipboard Mockifier is statically linked against it. Otherwise, any user will need to install Qt themselves in order to run Clipboard Mockifier, which is obviously not ideal.
+In terms of Qt, you will likely want to [build it yourself statically](https://retifrav.github.io/blog/2018/02/17/build-qt-statically) and then install it, so that Clipboard Mockifier is statically linked against it. Otherwise, any user will need to install Qt themselves in order to run Clipboard Mockifier, which is obviously not ideal.
 
 ## Preparation
 Run `VERSION=$version make configure` where "$version" is the version you want to appear on the settings screen. Run this every time you want to change the displayed version.

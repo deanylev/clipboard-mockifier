@@ -4,6 +4,7 @@ include(../vendor/vendor.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 HEADERS += ../src/MainWindow.h
 ICON = ../res/icon.icns
+LIBS += -dead_strip
 QMAKE_INFO_PLIST = ../res/clipboard-mockifier-Info.plist
 QT += core gui widgets
 RC_ICONS = ../res/icon.ico

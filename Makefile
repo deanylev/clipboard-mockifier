@@ -1,3 +1,4 @@
+CONFIG ?= release
 VERSION ?= dev
 
 .PHONY: all configure run installer clean
@@ -6,7 +7,7 @@ all:
 	cd build && make
 
 configure: clean
-	cd build && qmake clipboard-mockifier.pro DEFINES+='VERSION=\\\"${VERSION}\\\"'
+	cd build && qmake -config ${CONFIG} clipboard-mockifier.pro DEFINES+='VERSION=\\\"${VERSION}\\\"'
 
 run: all
 	killall "Clipboard Mockifier" || true
