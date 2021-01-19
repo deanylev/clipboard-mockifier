@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QMenu>
 #include <QPixmap>
+#include <QPushButton>
 #include <QSystemTrayIcon>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -38,11 +39,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
   QLabel *labelVersion = new QLabel((std::string("Version ") + VERSION).c_str(), this);
   QLabel *labelMockifiyClipboard = new QLabel("Keyboard Shortcut", this);
 
+  QPushButton *buttonClose = new QPushButton("Close", this);
+  connect(buttonClose, &QPushButton::clicked, this, &MainWindow::hide);
+
   QVBoxLayout *layout = new QVBoxLayout();
   layout->addWidget(labelImage);
   layout->addWidget(labelVersion);
   layout->addWidget(labelMockifiyClipboard);
   layout->addWidget(keySequenceEditMockifyClipboard);
+  layout->addWidget(buttonClose);
 
   QWidget *window = new QWidget();
   window->setLayout(layout);
